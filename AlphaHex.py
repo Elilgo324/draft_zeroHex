@@ -4,43 +4,23 @@ from numpy import array
 import numpy as np
 import sys
 
+"""
+creation of mcts consists four stages:
+1. selection
+    used for nodes we've seen before
+    pick according ucb
+2. expansion
+    used when we reach the frontier
+    add one node per playout
+3. simulation
+    used beyond search frontier
+    no use of ucb, just random
+4. backprop
+    after reaching leaf (win/lose stage)
+    update value & visit of the nodes from selection and expansion
+"""
 
-class Node(object):
-    """Node used in MCTS"""
 
-    def __init__(self, state, parent_node, prior_prob):
-        self.state = state
-        self.children = {}  # maps moves to Nodes
-        self.visits = 0
-        self.value = 0.5
-        # self.value = 0.5 if parent_node is None else parent_node.value
-        self.prior_prob = prior_prob
-        self.prior_policy = np.zeros((8, 8))
-        self.parent_node = parent_node
-
-    def updateValue(self, outcome, debug=False):
-        """Updates the value estimate for the node's state."""
-        if debug:
-            print('visits: ', self.visits)
-            print('before value: ', self.value)
-            print('outcome: ', outcome)
-        self.value = (self.visits * self.value + outcome) / (self.visits + 1)
-        self.visits += 1
-        if debug:
-            print('updated value:', self.value)
-
-    def UCBWeight_noPolicy(self, parent_visits, UCB_const, player):
-        if player == -1:
-            return (1 - self.value) + UCB_const * sqrt(parent_visits) / (1 + self.visits)
-        else:
-            return self.value + UCB_const * sqrt(parent_visits) / (1 + self.visits)
-
-    def UCBWeight(self, parent_visits, UCB_const, player):
-        """Weight from the UCB formula used by parent to select a child."""
-        if player == -1:
-            return (1 - self.value) + UCB_const * self.prior_prob / (1 + self.visits)
-        else:
-            return self.value + UCB_const * self.prior_prob / (1 + self.visits)
 
 
 class MCTS:
@@ -198,6 +178,56 @@ class MCTS:
         else:
             normalized_probs = {action: (child.visits / len(child_visits)) for action, child in items}
         return normalized_probs
+
+
+class Node(object):
+    """
+    node in monte carlo game tree
+    a node represents game's state (notice that multiple nodes can represent same state)
+    visits counts
+    value represents the probability of winning
+    """
+    def __init__(self, state, parent_node, prior_prob):
+        self.state = state
+        self.children = {}  # maps moves to Nodes
+        self.visits = 0
+        self.value = 0.5
+        # self.value = 0.5 if parent_node is None else parent_node.value
+        self.prior_prob = prior_prob
+        self.prior_policy = np.zeros((8, 8))
+        self.parent_node = parent_node
+
+    def updateValue(self, outcome, debug=False):
+        """Updates the value estimate for the node's state."""
+        if debug:
+            print('visits: ', self.visits)
+            print('before value: ', self.value)
+            print('outcome: ', outcome)
+        self.value = (self.visits * self.value + outcome) / (self.visits + 1)
+        self.visits += 1
+        if debug:
+            print('updated value:', self.value)
+
+    def UCBWeight_noPolicy(self, parent_visits, UCB_const, player):
+        """
+        calc upper confidence bound
+        :param parent_visits:
+        :param UCB_const: const to tune explore/exploit
+        :param player: if white or black player
+        :return: upper confidence bound
+        """
+        if player == -1:
+            return (1 - self.value) + UCB_const * sqrt(parent_visits) / (1 + self.visits)
+        else:
+            return self.value + UCB_const * sqrt(parent_visits) / (1 + self.visits)
+
+    def UCBWeight(self, parent_visits, UCB_const, player):
+        """Weight from the UCB formula used by parent to select a child."""
+        if player == -1:
+            return (1 - self.value) + UCB_const * self.prior_prob / (1 + self.visits)
+        else:
+            return self.value + UCB_const * self.prior_prob / (1 + self.visits)
+
 
 
 class DeepLearningPlayer:
