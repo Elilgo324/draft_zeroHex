@@ -239,19 +239,20 @@ class DeepLearningPlayer:
             root_node = self.MCTS.visited_nodes[game]
         else:
             root_node = self.MCTS.expandRoot(game)
+
+        # run mcts from current stage and get moves and probs
         self.MCTS.runSearch(root_node, self.rollouts)
         searchProbabilities = self.MCTS.getSearchProbabilities(root_node)
         moves = list(searchProbabilities.keys())
         probs = list(searchProbabilities.values())
         prob_items = searchProbabilities.items()
-        print(probs)
+
         # if competitive play, choose highest prob move
         if self.competitive:
             best_move = max(prob_items, key=lambda c: c[1])
-            print(best_move)
-            # sys.exit(1)
             return best_move[0]
-        # else if self-play, choose stochastically
+
+        # else if self-play, choose by probs
         else:
             chosen_idx = choice(len(moves), p=probs)
             return moves[chosen_idx]
