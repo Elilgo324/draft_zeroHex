@@ -103,18 +103,20 @@ class MCTS:
         root_node.updateValue(outcome)
 
     def runSearch(self, root_node, num_searches):
-        # start search from root
+        """
+        do 4 stages - selection, expansion, simulation & backprop
+        """
+        # start from root
         for i in range(num_searches):
             selected_node = root_node
             available_moves = selected_node.state.availableMoves
-            # if we've already explored this node, continue down path until we reach a node we haven't expanded yet by selecting node w/ largest UCB weight
-            # select node that maximizes Upper Confidence Bound
+
+            # while explored and not a leaf, select child with max ucb
             while len(available_moves) == len(selected_node.children) and not selected_node.state.isTerminal:
-                if selected_node == root_node:
-                    selected_node = self._select(selected_node, debug=False)
-                else:
-                    selected_node = self._select(selected_node, debug=False)
+                selected_node = self._select(selected_node, debug=False)
                 available_moves = selected_node.state.availableMoves
+
+            # if reached non explored and not a leaf
             if not selected_node.state.isTerminal:
                 if self.use_policy:
                     if selected_node.state not in self.visited_nodes:
@@ -129,6 +131,7 @@ class MCTS:
                     for move in moves:
                         if not selected_node.state.makeMove(move) in self.nodes:
                             break
+            # if reached leaf
             else:
                 outcome = 1 if selected_node.state.winner == 1 else 0
                 self._backprop(selected_node, root_node, outcome)
@@ -140,7 +143,6 @@ class MCTS:
                 child_node = Node(next_state, parent_node, parent_node.prior_policy[move[0]][move[1]])
                 # print(parent_node.prior_policy[move[0]][move[1]])
                 parent_node.children[move] = child_node
-
 
     def modelPredict(self, state):
         if state.turn == -1:
@@ -171,11 +173,12 @@ class MCTS:
         items = children.items()
         child_visits = [child.visits for action, child in items]
         sum_visits = sum(child_visits)
-        # print(child_visits)
+
         if sum_visits != 0:
             normalized_probs = {action: (child.visits / sum_visits) for action, child in items}
         else:
             normalized_probs = {action: (child.visits / len(child_visits)) for action, child in items}
+
         return normalized_probs
 
 
@@ -186,6 +189,7 @@ class Node(object):
     visits counts
     value represents the probability of winning
     """
+
     def __init__(self, state, parent_node, prior_prob):
         self.state = state
         self.children = {}  # maps moves to Nodes
@@ -216,7 +220,6 @@ class Node(object):
             return (1 - self.value) + UCB_const * self.prior_prob / (1 + self.visits)
         else:
             return self.value + UCB_const * self.prior_prob / (1 + self.visits)
-
 
 
 class DeepLearningPlayer:
