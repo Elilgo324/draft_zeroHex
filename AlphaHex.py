@@ -8,7 +8,7 @@ import sys
 creation of mcts consists four stages:
 1. selection
     used for nodes we've seen before
-    pick according ucb
+    pick node with max ucb
 2. expansion
     used when we reach the frontier
     add one node per playout
@@ -21,15 +21,86 @@ creation of mcts consists four stages:
 """
 
 
-
-
 class MCTS:
     def __init__(self, model, UCB_const=2, use_policy=True, use_value=True):
-        self.visited_nodes = {}  # maps state to node
         self.model = model
+        self.visited_nodes = {}  # maps state to node
         self.UCB_const = UCB_const
         self.use_policy = use_policy
         self.use_value = use_value
+
+    def _select(self, parent_node, debug=False):
+        """
+        1. selection
+            used for nodes we've seen before
+            pick node with max ucb
+        """
+        children = parent_node.children
+        items = children.items()
+
+        if self.use_policy:
+            UCB_weights = [(v.UCBWeight(parent_node.visits, self.UCB_const, parent_node.state.turn), v)
+                           for k, v in items]
+        else:
+            UCB_weights = [(v.UCBWeight_noPolicy(parent_node.visits, self.UCB_const, parent_node.state.turn), v)
+                           for k, v in items]
+
+        # choose the action with max UCB
+        node = max(UCB_weights, key=lambda c: c[0])
+        return node[1]
+
+    def expand(self, selected_node, debug=False):
+        """
+        2. expansion
+            used when we reach the frontier
+            add one node per playout
+        """
+        if self.use_policy or self.use_value:
+            probs, value = self.modelPredict(selected_node.state)
+            selected_node.prior_policy = probs
+
+        if not self.use_value:
+            # select randomly
+            value = self._simulate(selected_node)
+
+        selected_node.value = value
+        self.visited_nodes[selected_node.state] = selected_node
+        self.create_children(selected_node)
+        return selected_node
+
+    def _simulate(self, next_node):
+        """
+        3. simulation
+            used beyond search frontier
+            no use of ucb, just random
+        """
+        state = next_node.state
+        while not state.isTerminal:
+            available_moves = state.availableMoves
+            # choice returns random item
+            index = choice(range(len(available_moves)))
+            move = available_moves[index]
+            state = state.makeMove(move)
+        return (state.winner + 1) / 2
+
+    def _backprop(self, selected_node, root_node, outcome, debug=False):
+        """
+        4. backprop
+            after reaching leaf (win/lose stage)
+            update value & visit of the nodes from selection and expansion
+        """
+        current_node = selected_node
+        # determine win or lose value
+        if selected_node.state.isTerminal:
+            outcome = 1 if selected_node.state.winner == 1 else 0
+
+        # update nodes' values from bottom to top
+        while current_node != root_node:
+            current_node.updateValue(outcome, debug=False)
+            current_node = current_node.parent_node
+
+        # update root node's value
+        root_node.updateValue(outcome)
 
     def runSearch(self, root_node, num_searches):
         # start search from root
@@ -70,34 +141,6 @@ class MCTS:
                 # print(parent_node.prior_policy[move[0]][move[1]])
                 parent_node.children[move] = child_node
 
-    def _select(self, parent_node, debug=False):
-        '''returns node with max UCB Weight'''
-        # print(parent_node.prior_policy)
-        # if len(parent_node.state.availableMoves) != len(parent_node.children):
-        #    for move in parent_node.state.availableMoves:
-        #        next_state = parent_node.state.makeMove(move)
-        #        child_node = Node(next_state, parent_node, parent_node.prior_policy[move[0]][move[1]])
-        #        # print(parent_node.prior_policy[move[0]][move[1]])
-        #        parent_node.children[move] = child_node
-        children = parent_node.children
-        items = children.items()
-        if self.use_policy:
-            UCB_weights = [(v.UCBWeight(parent_node.visits, self.UCB_const, parent_node.state.turn), v) for k, v in
-                           items]
-        else:
-            UCB_weights = [(v.UCBWeight_noPolicy(parent_node.visits, self.UCB_const, parent_node.state.turn), v) for
-                           k, v in items]
-        # if debug:
-        #   print([k for k, v in UCB_weights])
-        # sys.exit(1)
-        # choose the action with max UCB
-        node = max(UCB_weights, key=lambda c: c[0])
-        if debug:
-            print('weight:', node[0])
-            print('move:', node[1].state)
-            print('value:', node[1].value)
-            print('visits:', node[1].visits)
-        return node[1]
 
     def modelPredict(self, state):
         if state.turn == -1:
@@ -122,50 +165,6 @@ class MCTS:
         self.visited_nodes[state] = root_node
         self.create_children(root_node)
         return root_node
-
-    def expand(self, selected_node, debug=False):
-        # policy = [selected_node.prior_policy[move] for move in selected_node.state.availableMoves]
-        # move = selected_node.state.availableMoves[policy.index(max(policy))]
-        # next_state = selected_node.state.makeMove(move)
-        # child_node = Node(next_state, selected_node, selected_node.prior_policy[move])
-        if self.use_policy or self.use_value:
-            probs, value = self.modelPredict(selected_node.state)
-            selected_node.prior_policy = probs
-        if not self.use_value:
-            # select randomly
-            value = self._simulate(selected_node)
-        if debug:
-            print('expanding node', selected_node.state)
-        selected_node.value = value
-        self.visited_nodes[selected_node.state] = selected_node
-        self.create_children(selected_node)
-        return selected_node
-
-    def _simulate(self, next_node):
-        # returns outcome of simulated playout
-        state = next_node.state
-        while not state.isTerminal:
-            available_moves = state.availableMoves
-            index = choice(range(len(available_moves)))
-            move = available_moves[index]
-            state = state.makeMove(move)
-        return (state.winner + 1) / 2
-
-    def _backprop(self, selected_node, root_node, outcome, debug=False):
-        current_node = selected_node
-        # print(outcome)
-        if selected_node.state.isTerminal:
-            outcome = 1 if selected_node.state.winner == 1 else 0
-        while current_node != root_node:
-            if debug:
-                print('selected_node: ', selected_node.state)
-                print('outcome: ', outcome)
-                print('backpropping')
-            current_node.updateValue(outcome, debug=False)
-            current_node = current_node.parent_node
-            # print(current_node.visits)
-        # update root node
-        root_node.updateValue(outcome)
 
     def getSearchProbabilities(self, root_node):
         children = root_node.children
@@ -199,22 +198,12 @@ class Node(object):
 
     def updateValue(self, outcome, debug=False):
         """Updates the value estimate for the node's state."""
-        if debug:
-            print('visits: ', self.visits)
-            print('before value: ', self.value)
-            print('outcome: ', outcome)
         self.value = (self.visits * self.value + outcome) / (self.visits + 1)
         self.visits += 1
-        if debug:
-            print('updated value:', self.value)
 
     def UCBWeight_noPolicy(self, parent_visits, UCB_const, player):
         """
         calc upper confidence bound
-        :param parent_visits:
-        :param UCB_const: const to tune explore/exploit
-        :param player: if white or black player
-        :return: upper confidence bound
         """
         if player == -1:
             return (1 - self.value) + UCB_const * sqrt(parent_visits) / (1 + self.visits)
