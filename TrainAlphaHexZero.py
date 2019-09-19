@@ -3,6 +3,7 @@ from AlphaHex import  DeepLearningPlayer
 from keras.models import load_model
 import numpy as np
 
+
 def formatTrainingData(training_data):
     """ training data is an array of tuples (boards, probs, value), we need to reshape into np array of state boards for x, and list of two np arrays of search probs and value for y"""
     x = []

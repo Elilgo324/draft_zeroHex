@@ -3,11 +3,13 @@ from numpy.random import choice
 from numpy import array
 import time
 
+
 class Node(object):
     """Node used in MCTS"""
+
     def __init__(self, state, parent_node, prior_prob):
         self.state = state
-        self.children = {} # maps moves to Nodes
+        self.children = {}  # maps moves to Nodes
         self.visits = 0
         self.value = 0
         self.prior_prob = prior_prob
@@ -15,24 +17,25 @@ class Node(object):
 
     def updateValue(self, outcome):
         """Updates the value estimate for the node's state."""
-        self.value = (self.visits*self.value + outcome + 1)/(self.visits+1)
+        self.value = (self.visits * self.value + outcome + 1) / (self.visits + 1)
         self.visits += 1
 
     def UCBWeight(self, parent_visits, UCB_const, player):
         """Weight from the UCB formula used by parent to select a child."""
         if player == -1:
-            return (1-self.value) + UCB_const*(1-self.prior_prob)*sqrt(parent_visits)/(1+self.visits)
+            return (1 - self.value) + UCB_const * (1 - self.prior_prob) * sqrt(parent_visits) / (1 + self.visits)
         else:
             # print('is player 1')
             # print('state: ', self.state)
             # print('value: ', self.value)
             # print('prob: ', self.prior_prob)
             # print('visits: ', self.visits)
-            return self.value + UCB_const*self.prior_prob*sqrt(parent_visits)/(1+self.visits)
+            return self.value + UCB_const * self.prior_prob * sqrt(parent_visits) / (1 + self.visits)
+
 
 class MCTS:
     def __init__(self, model, player, UCB_const=0.5):
-        self.visited_nodes = {} # maps state to node
+        self.visited_nodes = {}  # maps state to node
         self.player = player
         self.model = model
         self.UCB_const = UCB_const
@@ -55,19 +58,18 @@ class MCTS:
             self._backprop(selected_node, root_node)
         # return
 
-
     def _select(self, parent_node):
         '''returns node with max UCB Weight'''
         children = parent_node.children
         items = children.items()
-        UCB_weights = [(v.UCBWeight(parent_node.visits, self.UCB_const, parent_node.state.turn), v) for k,v in items]
+        UCB_weights = [(v.UCBWeight(parent_node.visits, self.UCB_const, parent_node.state.turn), v) for k, v in items]
         # choose the action with max UCB
         node = max(UCB_weights, key=lambda c: c[0])
         return node[1]
 
     def _expand(self, node):
         if node.state.turn == -1:
-            board = (-1*node.state.board).T.reshape((1, 1, 8, 8))
+            board = (-1 * node.state.board).T.reshape((1, 1, 8, 8))
         else:
             board = node.state.board.reshape((1, 1, 8, 8))
         # start_time = time.time()
@@ -78,7 +80,7 @@ class MCTS:
         probs = probs.reshape((8, 8))
         # print(probs)
         for move in node.state.availableMoves:
-            prob = probs[move[0]][move[1]]  
+            prob = probs[move[0]][move[1]]
             if node.state.turn == -1:
                 prob = probs[move[1]][move[0]]
             node.children[move] = Node(node.state.makeMove(move), node, prob)
@@ -106,10 +108,11 @@ class MCTS:
         child_visits = [child.visits for action, child in items]
         sum_visits = sum(child_visits)
         if sum_visits != 0:
-            normalized_probs = {action: (child.visits/sum_visits) for action, child in items}
+            normalized_probs = {action: (child.visits / sum_visits) for action, child in items}
         else:
-            normalized_probs = {action: (child.visits/len(child_visits)) for action, child in items}
+            normalized_probs = {action: (child.visits / len(child_visits)) for action, child in items}
         return normalized_probs
+
 
 class DeepLearningPlayer:
 

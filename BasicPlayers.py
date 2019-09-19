@@ -6,8 +6,10 @@
 from random import choice
 from sys import stdin
 
+
 class HumanPlayer:
     """Player that gets moves from command line input."""
+
     def __init__(self, *args):
         self.name = "Human"
 
@@ -24,8 +26,10 @@ class HumanPlayer:
                 print("invalid move")
         return move
 
+
 class RandomPlayer:
     """Player that selects a random legal move."""
+
     def __init__(self, *args):
         self.name = "Random"
 

@@ -3,11 +3,13 @@ from numpy.random import choice
 from numpy import array
 import numpy as np
 
+
 class Node(object):
     """Node used in MCTS"""
+
     def __init__(self, state, parent_node, prior_prob):
         self.state = state
-        self.children = {} # maps moves to Nodes
+        self.children = {}  # maps moves to Nodes
         self.visits = 0
         self.value = 0
         self.prior_prob = prior_prob
@@ -16,23 +18,26 @@ class Node(object):
 
     def updateValue(self, outcome):
         """Updates the value estimate for the node's state."""
-        self.value = (self.visits*self.value + outcome)/(self.visits+1)
+        self.value = (self.visits * self.value + outcome) / (self.visits + 1)
         self.visits += 1
+
     def UCBWeight_noPolicy(self, parent_visits, UCB_const, player):
         if player == -1:
-            return (1-self.value) + UCB_const*sqrt(parent_visits)/(1+self.visits)
+            return (1 - self.value) + UCB_const * sqrt(parent_visits) / (1 + self.visits)
         else:
-            return self.value + UCB_const*sqrt(parent_visits)/(1+self.visits)
+            return self.value + UCB_const * sqrt(parent_visits) / (1 + self.visits)
+
     def UCBWeight(self, parent_visits, UCB_const, player):
         """Weight from the UCB formula used by parent to select a child."""
         if player == -1:
-            return (1-self.value) + UCB_const*self.prior_prob*sqrt(parent_visits)/(1+self.visits)
+            return (1 - self.value) + UCB_const * self.prior_prob * sqrt(parent_visits) / (1 + self.visits)
         else:
-            return self.value + UCB_const*self.prior_prob*sqrt(parent_visits)/(1+self.visits)
+            return self.value + UCB_const * self.prior_prob * sqrt(parent_visits) / (1 + self.visits)
+
 
 class MCTS:
     def __init__(self, model, UCB_const=1, use_policy=True, use_value=True):
-        self.visited_nodes = {} # maps state to node
+        self.visited_nodes = {}  # maps state to node
         self.model = model
         self.UCB_const = UCB_const
         self.use_policy = use_policy
@@ -51,7 +56,7 @@ class MCTS:
                 available_moves = selected_node.state.availableMoves
             if not selected_node.state.isTerminal:
                 if self.use_policy:
-                # expansion
+                    # expansion
                     actual_policy = []
                     for move in selected_node.state.availableMoves:
                         actual_policy.append(selected_node.prior_policy[move])
@@ -75,7 +80,7 @@ class MCTS:
 
     def modelPredict(self, state):
         if state.turn == -1:
-            board = (-1*state.board).T.reshape((1, 1, 8, 8))
+            board = (-1 * state.board).T.reshape((1, 1, 8, 8))
         else:
             board = state.board.reshape((1, 1, 8, 8))
         if self.use_policy or self.use_value:
@@ -85,10 +90,11 @@ class MCTS:
             if state.turn == -1:
                 probs = probs.T
         return probs, value
+
     def expand(self, state, prior_prob, parent):
         child_node = Node(state, parent, prior_prob)
         if child_node.state.turn == -1:
-            board = (-1*child_node.state.board).T.reshape((1, 1, 8, 8))
+            board = (-1 * child_node.state.board).T.reshape((1, 1, 8, 8))
         else:
             board = child_node.state.board.reshape((1, 1, 8, 8))
         if self.use_policy or self.use_value:
@@ -109,14 +115,14 @@ class MCTS:
         children = parent_node.children
         items = children.items()
         if not self.use_policy:
-            UCB_weights = [(v.UCBWeight(parent_node.visits, self.UCB_const, parent_node.state.turn), v) for k,v in items]
+            UCB_weights = [(v.UCBWeight(parent_node.visits, self.UCB_const, parent_node.state.turn), v) for k, v in
+                           items]
         else:
-            UCB_weights = [(v.UCBWeight_noPolicy(parent_node.visits, self.UCB_const, parent_node.state.turn), v) for k,v in items]
+            UCB_weights = [(v.UCBWeight_noPolicy(parent_node.visits, self.UCB_const, parent_node.state.turn), v) for
+                           k, v in items]
         # choose the action with max UCB
         node = max(UCB_weights, key=lambda c: c[0])
         return node[1]
-
-
 
     def _simulate(self, next_node):
         # returns outcome of simulated playout
@@ -146,10 +152,11 @@ class MCTS:
         child_visits = [child.visits for action, child in items]
         sum_visits = sum(child_visits)
         if sum_visits != 0:
-            normalized_probs = {action: (child.visits/sum_visits) for action, child in items}
+            normalized_probs = {action: (child.visits / sum_visits) for action, child in items}
         else:
-            normalized_probs = {action: (child.visits/len(child_visits)) for action, child in items}
+            normalized_probs = {action: (child.visits / len(child_visits)) for action, child in items}
         return normalized_probs
+
 
 class DeepLearningPlayer:
     def __init__(self, model, rollouts=1600, save_tree=True, competitive=False):
@@ -159,6 +166,7 @@ class DeepLearningPlayer:
         self.MCTS = None
         self.save_tree = save_tree
         self.competitive = competitive
+
     def getMove(self, game):
         if self.MCTS is None:
             self.MCTS = MCTS(self.bestModel)
