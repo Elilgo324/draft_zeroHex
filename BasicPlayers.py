@@ -8,9 +8,10 @@ from sys import stdin
 
 
 class HumanPlayer:
-    """Player that gets moves from command line input."""
-
-    def __init__(self, *args):
+    """
+    human player uses cmd
+    """
+    def __init__(self):
         self.name = "Human"
 
     def getMove(self, game):
@@ -28,10 +29,12 @@ class HumanPlayer:
 
 
 class RandomPlayer:
-    """Player that selects a random legal move."""
-
-    def __init__(self, *args):
+    """
+    player that chooses random legal moves
+    """
+    def __init__(self):
         self.name = "Random"
 
     def getMove(self, game):
+        # choice returns random move
         return choice(game.availableMoves)
