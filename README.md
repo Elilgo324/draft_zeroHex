@@ -65,6 +65,9 @@ Creation of mcts consists four stages:
 ## AlphaHex Agent
 `AlphaHex.py` contains the actual agent that utilizes the general AlphaZero algorithm.
 
+## Gui
+Playing against the agent can be done by using https://github.com/DebuggerOR/hexgui.
+
 ## About Us
 Modified by Avshalom Tam, Ori Fogler and Shlomo Rabinovich as undergraduates' final project at Bar Ilan University.
 
