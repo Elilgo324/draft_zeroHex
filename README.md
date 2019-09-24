@@ -61,6 +61,8 @@ Creation of mcts consists four stages:
 Modified by Avshalom Tam, Ori Fogler and Shlomo Rabinovich as undergraduates' final project at BIU.
 
 ## Read & Watch more
+https://www.biostat.wisc.edu/~craven/cs760/lectures/AlphaZero.pdf.
+
 https://www.youtube.com/watch?v=MgowR4pq3e8&t=492s.
 
 http://u.cs.biu.ac.il/~sarit/advai2018/MCTS.pdf.
