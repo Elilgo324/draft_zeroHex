@@ -1,8 +1,4 @@
-## Us:
-Modified by Avshalom Tam, Ori Fogler and Shlomo Rabinovich as undergraduates' final project.
-
-## Read More Here:
-https://notes.jasonljin.com/projects/2018/05/20/Training-AlphaZero-To-Play-Hex.html:
+# AlphaZero humanized hex 
 
 ## Training the neural network
 `hex_zero_model.py` contains the building of the Deep Neural Network used for policy and value prediction.
@@ -25,3 +21,9 @@ https://notes.jasonljin.com/projects/2018/05/20/Training-AlphaZero-To-Play-Hex.h
 
 ### Instructions
 `python3 TrainAlphaHexZero.py`
+
+## Read More Here:
+https://notes.jasonljin.com/projects/2018/05/20/Training-AlphaZero-To-Play-Hex.html:
+
+## Us:
+Modified by Avshalom Tam, Ori Fogler and Shlomo Rabinovich as undergraduates' final project.
