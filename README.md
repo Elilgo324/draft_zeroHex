@@ -29,7 +29,7 @@ Backpropagation
     After reaching a terminal node.
     Update value and visits for states expanded in selection and expansion.
     
-## AlphaZero's Key Idea
+## AlphaZero in General
 todo
 
 ## This AlphaZero Implementation Details
