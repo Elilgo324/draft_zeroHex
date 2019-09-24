@@ -37,13 +37,13 @@ http://www.littlegolem.net/jsp/info/player_list.jsp?gtvar=hex_HEX11&countryid=&f
 Modified by Avshalom Tam, Ori Fogler and Shlomo Rabinovich as undergraduates' final project at BIU.
 
 ## Read & Watch more:
-https://notes.jasonljin.com/projects/2018/05/20/Training-AlphaZero-To-Play-Hex.html.
-
 https://www.youtube.com/watch?v=MgowR4pq3e8&t=492s.
 
 http://u.cs.biu.ac.il/~sarit/advai2018/MCTS.pdf.
 
 https://medium.com/oracledevs/lessons-from-implementing-alphazero-7e36e9054191 and more at medium.com.
+
+https://notes.jasonljin.com/projects/2018/05/20/Training-AlphaZero-To-Play-Hex.html.
 
 
 
