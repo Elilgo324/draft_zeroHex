@@ -1,5 +1,5 @@
-## Read More Here:
-Modified by Avshalom Tam, Ori Fogler and Shlomo Rabinovich.
+## Us:
+Modified by Avshalom Tam, Ori Fogler and Shlomo Rabinovich as undergraduates' final project.
 
 ## Read More Here:
 https://notes.jasonljin.com/projects/2018/05/20/Training-AlphaZero-To-Play-Hex.html:
