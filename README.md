@@ -39,17 +39,17 @@ Reinforcement learning differs from the supervised learning in a way that in sup
 ## MCTS
 Creation of mcts consists four stages:
 ### 1. Selection
-    used for nodes we've seen before
-    pick node with max ucb
+    Used for nodes we've seen before.
+    Pick according to UCB.
 ### 2. Expansion
-    used when we reach the frontier
-    add one node per playout
+    Used when we reach the frontier.
+    Add one node per playout.
 ### 3. Simulation
-    used beyond search frontier
-    no use of ucb, just random
-### 4. Backprop
-    after reaching leaf (win/lose stage)
-    update value & visit of the nodes from selection and expansion
+    Used beyond the search frontier.
+    Don't bother with UCB, just play randomly.
+### 4. Backpropagation
+    After reaching a terminal node.
+    Update value and visits for states expanded in selection and expansion.
 
 ## Self Play
 `TrainAlphaHexZero.py` contains a script to self-play a specified number of iterations. In each iteration, the AlphaHex agent plays a specified number of games against itself, where it collects randomly 50% of the game data played in the iteration and saves it into a .npz file. It then trains the current best model on this game data for a specified number of epochs, and evaluates the new model against this previous model for a specified number of iterations, where the results are written to a .txt file. If the win rate is over a set threshold, than the new model will become the new current best model to be used in the next iteration of self play.  
