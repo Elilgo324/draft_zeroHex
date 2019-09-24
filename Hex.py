@@ -28,7 +28,6 @@ def print_char(i):
     return EMPTY_CELL
 
 class HexGame:
-
     def __init__(self, size=8):
         self.size = size
         self.turn = 1
@@ -60,8 +59,10 @@ class HexGame:
         return repr(self) == repr(other)
 
     def makeMove(self, move):
-        """Returns a new ConnectionGame in which move has been played.
-        A move is a column into which a piece is dropped."""
+        """
+        Returns a new ConnectionGame in which move has been played.
+        A move is a column into which a piece is dropped.
+        """
         hg = HexGame(self.size)
         hg.board = np.array(self.board)
         hg.board[move[0], move[1]] = self.turn
@@ -126,7 +127,7 @@ def play_game(game, player1, player2, show=False):
 
 def playBryce(current_model, num_games=10, num_rollouts_1=400, num_rollouts_2=400, play_first=True, show=True):
     for i in range(num_games):
-        print('Game #: ' + str(i))
+        print('game #: ' + str(i))
         g = HexGame(8)
         if i%2:
             player1 = DeepLearningPlayer(current_model, rollouts=num_rollouts_1, save_tree=True, competitive=True)
@@ -139,7 +140,7 @@ def playBryce(current_model, num_games=10, num_rollouts_1=400, num_rollouts_2=40
 
 def playSelf(current_model, num_games=10, num_rollouts_1=400, num_rollouts_2=400, play_first=True, show=True):
       for i in range(num_games):
-          print('Game #: ' + str(i))
+          print('game #: ' + str(i))
           g = HexGame(8)
           player1 = DeepLearningPlayer(current_model, rollouts=num_rollouts_1, save_tree=True)
           player2 = DeepLearningPlayer(current_model, rollouts=num_rollouts_2, save_tree=True)
@@ -147,7 +148,7 @@ def playSelf(current_model, num_games=10, num_rollouts_1=400, num_rollouts_2=400
 
 def playRandom(current_model, num_games=10, num_rollouts=400, play_first=True, show=True):
     for i in range(num_games):
-        print('Game #: ' + str(i))
+        print('game #: ' + str(i))
         g = HexGame(8)
         if play_first:
             player1 = DeepLearningPlayer(current_model, rollouts=num_rollouts_1, save_tree=True, competitive=True)
@@ -160,25 +161,25 @@ def playRandom(current_model, num_games=10, num_rollouts=400, play_first=True, s
 def selfPlay(model_a, model_b, num_games, num_rollouts_1, num_rollouts_2, show):
     wins_a = 0
     for i in range(num_games):
-        print('Game #: ' + str(i))
+        print("game #: " + str(i))
         g = HexGame(8)
         player1 = DeepLearningPlayer(model_a, rollouts=num_rollouts_1, save_tree=True, competitive=True)
         player2 = DeepLearningPlayer(model_b, rollouts=num_rollouts_2, save_tree=True, competitive=True)
         if i%2:
             game = play_game(g, player1, player2, show)
-            if(game.winner == 1):
-                print('a wins')
+            if game.winner == 1:
+                print("a wins")
                 wins_a += 1
             else:
-                print('b wins')
+                print("b wins")
         else:
             game = play_game(g, player2, player1, show)
-            if(game.winner == -1):
-                print('a wins')
+            if game.winner == -1:
+                print("a wins")
                 wins_a += 1
             else:
-                print('b wins')
-    print('model a wins: ' + str(wins_a))
+                print("b wins")
+    print("model a wins: " + str(wins_a))
 
 if __name__ == "__main__":
     p = ArgumentParser()
