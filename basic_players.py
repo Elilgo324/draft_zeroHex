@@ -6,7 +6,6 @@ class HumanPlayer:
     """
     human player uses cmd
     """
-
     def __init__(self):
         self.name = "Human"
 
@@ -28,7 +27,6 @@ class RandomPlayer:
     """
     player that chooses random legal moves
     """
-
     def __init__(self):
         self.name = "Random"
 

@@ -1,27 +1,30 @@
+
+"""
+contains the actual agent that utilizes the general AlphaZero algorithm
+"""
+
 from math import log, sqrt
 from numpy.random import choice
 from numpy import array
 import numpy as np
-import sys
-
-"""
-creation of mcts consists four stages:
-1. selection
-    used for nodes we've seen before
-    pick node with max ucb
-2. expansion
-    used when we reach the frontier
-    add one node per playout
-3. simulation
-    used beyond search frontier
-    no use of ucb, just random
-4. backprop
-    after reaching leaf (win/lose stage)
-    update value & visit of the nodes from selection and expansion
-"""
 
 
 class MCTS:
+    """
+    creation of mcts consists four stages:
+    1. selection
+        used for nodes we've seen before
+        pick node with max ucb
+    2. expansion
+        used when we reach the frontier
+        add one node per playout
+    3. simulation
+        used beyond search frontier
+        no use of ucb, just random
+    4. backprop
+        after reaching leaf (win/lose stage)
+        update value & visit of the nodes from selection and expansion
+    """
     def __init__(self, model, UCB_const=2, use_policy=True, use_value=True):
         self.model = model
         self.visited_nodes = {}  # maps state to node
@@ -222,7 +225,7 @@ class Node(object):
             return self.value + UCB_const * self.prior_prob / (1 + self.visits)
 
 
-class DeepLearningPlayer:
+class Agent:
     def __init__(self, model, rollouts=1600, save_tree=True, competitive=False):
         self.name = "AlphaHex"
         self.bestModel = model

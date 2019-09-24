@@ -1,3 +1,8 @@
+
+"""
+contains the building of the Deep Neural Network used for policy and value prediction
+"""
+
 from keras.engine.topology import Input
 from keras.engine.training import Model
 from keras.layers.convolutional import Conv2D
@@ -20,7 +25,7 @@ momentum = 0.9
 
 def build_model():
     """
-    Builds the full Keras model and returns it.
+    builds full keras model and returns it
     """
     in_x = x = Input((1, 8, 8))
 

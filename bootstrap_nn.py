@@ -1,5 +1,11 @@
+
+"""
+contains a script to bootstrap the neural network on existing hex data
+calling on hex_zero_model to build the nn before training the nn for the specified epochs
+"""
+
 import numpy as np
-from hex_zero_model import build_model
+from nn_model import build_model
 
 
 def load_data(filename):

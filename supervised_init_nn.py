@@ -1,5 +1,17 @@
-from Hex import *
-from AlphaHex import  DeepLearningPlayer
+
+"""
+contains a script to self-play a specified number of iterations
+in each iteration, the AlphaHex agent plays a specified number of games against itself,
+where it collects randomly 50% of the game data played in the iteration and saves it into a .npz file
+it then trains the current best model on this game data for a specified number of epochs,
+and evaluates the new model against this previous model for a specified number of iterations,
+where the results are written to a .txt file
+if the win rate is over a set threshold,
+then the new model will become the new current best model to be used in the next iteration of self play
+"""
+
+from main import *
+from agent import  Agent
 from keras.models import load_model
 import numpy as np
 
@@ -48,12 +60,12 @@ def evaluateModel(new_model, current_model, iteration):
     # play 400 games between best and latest models
     for i in range(int(numEvaluationGames//2)):
         g = HexGame(8)  
-        game, _ = play_game(g, DeepLearningPlayer(new_model, rollouts=400), DeepLearningPlayer(current_model, rollouts=400), False)
+        game, _ = play_game(g,Agent(new_model,rollouts=400),Agent(current_model,rollouts=400),False)
         if game.winner:
             newChallengerWins += game.winner
     for i in range(int(numEvaluationGames//2)):
         g = HexGame(8)
-        game, _ = play_game(g, DeepLearningPlayer(current_model, rollouts=400), DeepLearningPlayer(new_model, rollouts=400), False)
+        game, _ = play_game(g,Agent(current_model,rollouts=400),Agent(new_model,rollouts=400),False)
         if game.winner == -1:
             newChallengerWins += game.winner
     winRate = newChallengerWins/numEvaluationGames
@@ -96,7 +108,8 @@ def play_game(game, player1, player2, show=True):
         print(game, "\n")
 
         if game.winner != 0:
-            print("player", print_char(game.winner), "(", end='')
+            #print("player", print_char(game.winner), "(", end='')
+            print("player",print_char(game.winner),"(")
             print((player1.name if game.winner == 1 else player2.name)+") wins")
         else:
             print("it's a draw")
@@ -110,8 +123,8 @@ def selfPlay(current_model, numGames, training_data):
     for i in range(numGames):
         print('Game #: ' + str(i))
         g = HexGame(8)
-        player1 = DeepLearningPlayer(current_model, rollouts=400)
-        player2 = DeepLearningPlayer(current_model, rollouts=400)
+        player1 = Agent(current_model,rollouts=400)
+        player2 = Agent(current_model,rollouts=400)
         # player2 = DeepLearningPlayer(current_model)
         game, new_training_data = play_game(g, player1, player2, False)
         training_data+= new_training_data
