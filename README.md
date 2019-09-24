@@ -1,4 +1,4 @@
-# AlphaZero humanized hex 
+# AlphaZeroHex regular & humanized 
 
 ## Training the neural network
 `hex_zero_model.py` contains the building of the Deep Neural Network used for policy and value prediction.
