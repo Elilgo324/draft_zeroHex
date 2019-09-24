@@ -1,8 +1,3 @@
-#! /usr/bin/env python3
-########################################
-# CS63: Artificial Intelligence, Final Project
-# Spring 2018, Swarthmore College
-########################################
 
 import numpy as np
 from scipy.ndimage import label
