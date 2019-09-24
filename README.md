@@ -17,7 +17,13 @@ http://hex.kosmanor.com/hex-bin/board/.
 ### Our Representation
 TODO
 
-## Training the neural network
+## The DNN
+TODO
+
+### Note
+The focus in humanizing the agent was in adjusting the search tree's parameters and not the nn's. 
+
+## Training the DNN
 `hex_zero_model.py` contains the building of the Deep Neural Network used for policy and value prediction.
 `sl_bootstrap.py` contains a script to bootstrap the neural network on existing hex data, calling on hex_zero_model to build the neural net before training the neural net for the specified epochs.
 
