@@ -6,7 +6,51 @@ In this work, we implement approach for designing such agents with the game of h
 ### Supervision and Original Paper
 TODO
 
-## Data
+## ResNet
+TODO
+
+## Reinforcement Learning
+Reinforcement learning differs from the supervised learning in a way that in supervised learning the training data has the answer key with it so the model is trained with the correct answer itself whereas in reinforcement learning, there is no answer but the reinforcement agent decides what to do to perform the given task. In the absence of training dataset, it is bound to learn from its experience.
+
+## MCTS
+TODO
+
+### Creation of mcts consists four stages:
+Selection
+    Used for nodes we've seen before.
+    Pick according to UCB.
+Expansion
+    Used when we reach the frontier.
+    Add one node per playout.
+Simulation
+    Used beyond the search frontier.
+    Don't bother with UCB, just play randomly.
+Backpropagation
+    After reaching a terminal node.
+    Update value and visits for states expanded in selection and expansion.
+    
+## AlphaZero's Key Idea
+todo
+
+## This AlphaZero Implementation Details
+TODO
+
+###
+`TrainAlphaHexZero.py` contains a script to self-play a specified number of iterations. In each iteration, the AlphaHex agent plays a specified number of games against itself, where it collects randomly 50% of the game data played in the iteration and saves it into a .npz file. It then trains the current best model on this game data for a specified number of epochs, and evaluates the new model against this previous model for a specified number of iterations, where the results are written to a .txt file. If the win rate is over a set threshold, than the new model will become the new current best model to be used in the next iteration of self play.  
+
+###
+`Hex.py` contains several functions to play against different players (Self, Random, HexPlayerBryce), where you can specify the number of games and who's player 1, and whether to show the game turn by turn. 
+
+###
+`AlphaHex.py` contains the actual agent that utilizes the general AlphaZero algorithm.
+
+###
+`hex_zero_model.py` contains the building of the Deep Neural Network used for policy and value prediction.
+`sl_bootstrap.py` contains a script to bootstrap the neural network on existing hex data, calling on hex_zero_model to build the neural net before training the neural net for the specified epochs.
+
+## Humanization Train
+
+### Data
 We found lists of ELO ranked players and their games (board size 11X11) at http://www.littlegolem.net/jsp/info/player_list.jsp?gtvar=hex_HEX11&countryid=&filter=&Send=submit.
 
 ### Original Representation Example
@@ -18,55 +62,11 @@ TODO
 ### More Sources
 http://hex.kosmanor.com/hex-bin/board/.
 
-## The DNN
-TODO
-
-### Note
-The focus in humanizing the agent was in adjusting the search tree's parameters and not the nn's. 
-
-## Training the DNN
-`hex_zero_model.py` contains the building of the Deep Neural Network used for policy and value prediction.
-`sl_bootstrap.py` contains a script to bootstrap the neural network on existing hex data, calling on hex_zero_model to build the neural net before training the neural net for the specified epochs.
-
-### Command
-`python3 sl_bootstrap.py`.
-
-
-## Reinforcement Learning
-Reinforcement learning differs from the supervised learning in a way that in supervised learning the training data has the answer key with it so the model is trained with the correct answer itself whereas in reinforcement learning, there is no answer but the reinforcement agent decides what to do to perform the given task. In the absence of training dataset, it is bound to learn from its experience.
-
-## MCTS
-Creation of mcts consists four stages:
-### 1. Selection
-    Used for nodes we've seen before.
-    Pick according to UCB.
-### 2. Expansion
-    Used when we reach the frontier.
-    Add one node per playout.
-### 3. Simulation
-    Used beyond the search frontier.
-    Don't bother with UCB, just play randomly.
-### 4. Backpropagation
-    After reaching a terminal node.
-    Update value and visits for states expanded in selection and expansion.
-
-## Self Play
-`TrainAlphaHexZero.py` contains a script to self-play a specified number of iterations. In each iteration, the AlphaHex agent plays a specified number of games against itself, where it collects randomly 50% of the game data played in the iteration and saves it into a .npz file. It then trains the current best model on this game data for a specified number of epochs, and evaluates the new model against this previous model for a specified number of iterations, where the results are written to a .txt file. If the win rate is over a set threshold, than the new model will become the new current best model to be used in the next iteration of self play.  
-
-### Command
-`python3 TrainAlphaHexZero.py`.
-
-## Evaluating against various players
-`Hex.py` contains several functions to play against different players (Self, Random, HexPlayerBryce), where you can specify the number of games and who's player 1, and whether to show the game turn by turn. 
-
-### Command
-`python3 Hex.py`.
-
-## AlphaHex Agent
-`AlphaHex.py` contains the actual agent that utilizes the general AlphaZero algorithm.
+###
+todo
 
 ## Gui
-Playing against the agent can be done by using https://github.com/DebuggerOR/hexgui.
+Here you can find a gui that works with the agent - https://github.com/DebuggerOR/hexgui.
 
 ## About Us
 Modified by Avshalom Tam, Ori Fogler and Shlomo Rabinovich as undergraduates' final project at Bar Ilan University.
