@@ -1,4 +1,7 @@
 ## Read More Here:
+Modified by Avshalom Tam, Ori Fogler and Shlomo Rabinovich.
+
+## Read More Here:
 https://notes.jasonljin.com/projects/2018/05/20/Training-AlphaZero-To-Play-Hex.html:
 
 ## Training the neural network
@@ -19,5 +22,6 @@ https://notes.jasonljin.com/projects/2018/05/20/Training-AlphaZero-To-Play-Hex.h
 
 ## Self-Play & Reinforcement Learning
 `TrainAlphaHexZero.py` contains a script to self-play a specified number of iterations. In each iteration, the AlphaHex agent plays a specified number of games against itself, where it collects randomly 50% of the game data played in the iteration and saves it into a .npz file. It then trains the current best model on this game data for a specified number of epochs, and evaluates the new model against this previous model for a specified number of iterations, where the results are written to a .txt file. If the win rate is over a set threshold, than the new model will become the new current best model to be used in the next iteration of self play.  
+
 ### Instructions
 `python3 TrainAlphaHexZero.py`
