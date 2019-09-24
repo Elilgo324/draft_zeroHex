@@ -41,4 +41,6 @@ https://notes.jasonljin.com/projects/2018/05/20/Training-AlphaZero-To-Play-Hex.h
 
 https://www.youtube.com/watch?v=MgowR4pq3e8&t=492s.
 
+http://u.cs.biu.ac.il/~sarit/advai2018/MCTS.pdf.
+
 
