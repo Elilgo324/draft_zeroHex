@@ -1,21 +1,22 @@
 # AlphaZeroHex: Regular & Humanized 
-Human players prefer training with human opponents over agents as the latter are distinctively different in level and style than humans. Agents designed for human-agent play are capable of adjusting their level, however their style is not aligned with that of human players. In this work, we implement approach for designing such agents.
+Human players prefer training with human opponents over agents as the latter are distinctively different in level and style than humans.
+Agents designed for human-agent play are capable of adjusting their level, however their style is not aligned with that of human players.
+In this work, we implement approach for designing such agents.
 
 ### Supervision and Original Paper
 TODO
 
 ## Data
-Lists of ELO ranked players and their games (size 11X11).
-http://www.littlegolem.net/jsp/info/player_list.jsp?gtvar=hex_HEX11&countryid=&filter=&Send=submit.
-
-### More Sources
-http://hex.kosmanor.com/hex-bin/board/.
+We found lists of ELO ranked players and their games (board size 11X11) at http://www.littlegolem.net/jsp/info/player_list.jsp?gtvar=hex_HEX11&countryid=&filter=&Send=submit.
 
 ### Original Representation Example
 (;FF[4]EV[hex.mc.2010.oct.1.11]PB[Maciej Celuch]PW[pensando]SZ[13]RE[B]GC[ game #1254910]SO[http://www.littlegolem.com];W[mf];B[gg];W[de];B[df];W[ji];B[if];W[ld];B[jg];W[jf];B[ig];W[kg];B[kc];W[mb];B[ma];W[lb];B[la];W[kb];B[ka];W[jb];B[ja];W[hc];B[hb];W[fd];B[fc];W[ib];B[ia];W[gc];B[gb];W[cd];B[da];W[eb];B[dd];W[ce];B[dc];W[cc];B[db];W[bb];B[le];W[kf];B[ke];W[je];B[il];W[jj];B[kk];W[hk];B[resign])
 
 ### Our Representation
 TODO
+
+### More Sources
+http://hex.kosmanor.com/hex-bin/board/.
 
 ## The DNN
 TODO
