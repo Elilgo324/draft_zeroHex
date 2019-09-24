@@ -37,7 +37,7 @@ http://www.littlegolem.net/jsp/info/player_list.jsp?gtvar=hex_HEX11&countryid=&f
 Modified by Avshalom Tam, Ori Fogler and Shlomo Rabinovich as undergraduates' final project at BIU.
 
 ## Read & Watch more:
-https://notes.jasonljin.com/projects/2018/05/20/Training-AlphaZero-To-Play-Hex.html:.
+https://notes.jasonljin.com/projects/2018/05/20/Training-AlphaZero-To-Play-Hex.html.
 
 https://www.youtube.com/watch?v=MgowR4pq3e8&t=492s.
 
