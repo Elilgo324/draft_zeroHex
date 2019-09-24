@@ -3,9 +3,6 @@ Human players prefer training with human opponents over agents as the latter are
 Agents designed for human-agent play are capable of adjusting their level, however their style is not aligned with that of human players.
 In this work, we implement approach for designing such agents.
 
-### Supervision and Original Paper
-TODO
-
 ## Data
 We found lists of ELO ranked players and their games (board size 11X11) at http://www.littlegolem.net/jsp/info/player_list.jsp?gtvar=hex_HEX11&countryid=&filter=&Send=submit.
 
@@ -31,14 +28,6 @@ The focus in humanizing the agent was in adjusting the search tree's parameters 
 ### Command
 `python3 sl_bootstrap.py`.
 
-## Evaluating against various players
-`Hex.py` contains several functions to play against different players (Self, Random, HexPlayerBryce), where you can specify the number of games and who's player 1, and whether to show the game turn by turn. 
-
-### Command
-`python3 Hex.py`.
-
-## AlphaHex Agent
-`AlphaHex.py` contains the actual agent that utilizes the general AlphaZero algorithm. 
 
 ## Reinforcement Learning
 Reinforcement learning differs from the supervised learning in a way that in supervised learning the training data has the answer key with it so the model is trained with the correct answer itself whereas in reinforcement learning, there is no answer but the reinforcement agent decides what to do to perform the given task. In the absence of training dataset, it is bound to learn from its experience.
@@ -64,8 +53,20 @@ Creation of mcts consists four stages:
 ### Command
 `python3 TrainAlphaHexZero.py`.
 
-## Us
-Modified by Avshalom Tam, Ori Fogler and Shlomo Rabinovich as undergraduates' final project at BIU.
+## Evaluating against various players
+`Hex.py` contains several functions to play against different players (Self, Random, HexPlayerBryce), where you can specify the number of games and who's player 1, and whether to show the game turn by turn. 
+
+### Command
+`python3 Hex.py`.
+
+## AlphaHex Agent
+`AlphaHex.py` contains the actual agent that utilizes the general AlphaZero algorithm. 
+
+## About Us
+Modified by Avshalom Tam, Ori Fogler and Shlomo Rabinovich as undergraduates' final project at Bar Ilan University.
+
+### Supervision and Original Paper
+TODO
 
 ## Read & Watch more
 https://www.biostat.wisc.edu/~craven/cs760/lectures/AlphaZero.pdf.
