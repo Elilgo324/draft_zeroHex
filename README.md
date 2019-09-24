@@ -43,4 +43,8 @@ https://www.youtube.com/watch?v=MgowR4pq3e8&t=492s.
 
 http://u.cs.biu.ac.il/~sarit/advai2018/MCTS.pdf.
 
+https://medium.com/oracledevs/lessons-from-implementing-alphazero-7e36e9054191 and more at medium.com.
+
+
+
 
