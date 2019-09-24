@@ -8,6 +8,7 @@ from numpy.random import choice
 from numpy import array
 import numpy as np
 
+
 class MCTS:
     """
     creation of mcts consists four stages:

@@ -108,7 +108,7 @@ def play_game(game, player1, player2, show=True):
         print(game, "\n")
 
         if game.winner != 0:
-            #print("player", print_char(game.winner), "(", end='')
+            # print("player", print_char(game.winner), "(", end='')
             print("player",print_char(game.winner),"(")
             print((player1.name if game.winner == 1 else player2.name)+") wins")
         else:
