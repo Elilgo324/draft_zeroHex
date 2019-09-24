@@ -3,6 +3,9 @@ Human players prefer training with human opponents over agents as the latter are
 Agents designed for human-agent play are capable of adjusting their level, however their style is not aligned with that of human players.
 In this work, we implement approach for designing such agents.
 
+### Supervision and Original Paper
+TODO
+
 ## Data
 We found lists of ELO ranked players and their games (board size 11X11) at http://www.littlegolem.net/jsp/info/player_list.jsp?gtvar=hex_HEX11&countryid=&filter=&Send=submit.
 
@@ -60,13 +63,10 @@ Creation of mcts consists four stages:
 `python3 Hex.py`.
 
 ## AlphaHex Agent
-`AlphaHex.py` contains the actual agent that utilizes the general AlphaZero algorithm. 
+`AlphaHex.py` contains the actual agent that utilizes the general AlphaZero algorithm.
 
 ## About Us
 Modified by Avshalom Tam, Ori Fogler and Shlomo Rabinovich as undergraduates' final project at Bar Ilan University.
-
-### Supervision and Original Paper
-TODO
 
 ## Read & Watch more
 https://www.biostat.wisc.edu/~craven/cs760/lectures/AlphaZero.pdf.
