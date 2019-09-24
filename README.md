@@ -1,4 +1,4 @@
-# AlphaZeroHex regular & humanized 
+# AlphaZeroHex Regular & Humanized 
 
 ### TODO
 describe more and better.
@@ -8,7 +8,7 @@ Lists of ELO ranked players and their games (size 11X11).
 http://www.littlegolem.net/jsp/info/player_list.jsp?gtvar=hex_HEX11&countryid=&filter=&Send=submit.
 
 ### Original representation
-(;FF[4]EV[hex.mc.2010.oct.1.11]PB[Maciej Celuch]PW[pensando]SZ[13]RE[B]GC[ game #1254910]SO['http://www.littlegolem.com'];W[mf];B[gg];W[de];B[df];W[ji];B[if];W[ld];B[jg];W[jf];B[ig];W[kg];B[kc];W[mb];B[ma];W[lb];B[la];W[kb];B[ka];W[jb];B[ja];W[hc];B[hb];W[fd];B[fc];W[ib];B[ia];W[gc];B[gb];W[cd];B[da];W[eb];B[dd];W[ce];B[dc];W[cc];B[db];W[bb];B[le];W[kf];B[ke];W[je];B[il];W[jj];B[kk];W[hk];B[resign])
+(;FF[4]EV[hex.mc.2010.oct.1.11]PB[Maciej Celuch]PW[pensando]SZ[13]RE[B]GC[ game #1254910]SO[http://www.littlegolem.com];W[mf];B[gg];W[de];B[df];W[ji];B[if];W[ld];B[jg];W[jf];B[ig];W[kg];B[kc];W[mb];B[ma];W[lb];B[la];W[kb];B[ka];W[jb];B[ja];W[hc];B[hb];W[fd];B[fc];W[ib];B[ia];W[gc];B[gb];W[cd];B[da];W[eb];B[dd];W[ce];B[dc];W[cc];B[db];W[bb];B[le];W[kf];B[ke];W[je];B[il];W[jj];B[kk];W[hk];B[resign])
 
 
 ## Training the neural network
@@ -33,8 +33,12 @@ http://www.littlegolem.net/jsp/info/player_list.jsp?gtvar=hex_HEX11&countryid=&f
 ### Instructions
 `python3 TrainAlphaHexZero.py`
 
-## Read More Here:
-https://notes.jasonljin.com/projects/2018/05/20/Training-AlphaZero-To-Play-Hex.html:
-
 ## Us:
-Modified by Avshalom Tam, Ori Fogler and Shlomo Rabinovich as undergraduates' final project.
+Modified by Avshalom Tam, Ori Fogler and Shlomo Rabinovich as undergraduates' final project at BIU.
+
+## Read & Watch more:
+https://notes.jasonljin.com/projects/2018/05/20/Training-AlphaZero-To-Play-Hex.html:.
+
+https://www.youtube.com/watch?v=MgowR4pq3e8&t=492s.
+
+
