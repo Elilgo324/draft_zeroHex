@@ -1,7 +1,8 @@
 # AlphaZeroHex Regular & Humanized 
+Human players prefer training with human opponents over agents as the latter are distinctively different in level and style than humans. Agents designed for human-agent play are capable of adjusting their level, however their style is not aligned with that of human players. In this work, we implement approach for designing such agents.
 
-### TODO
-describe more and better.
+TODO
+supervision and link to paper etc.
 
 ## Data
 Lists of ELO ranked players and their games (size 11X11).
@@ -56,10 +57,10 @@ Creation of mcts consists four stages:
 ### Command
 `python3 TrainAlphaHexZero.py`.
 
-## Us:
+## Us
 Modified by Avshalom Tam, Ori Fogler and Shlomo Rabinovich as undergraduates' final project at BIU.
 
-## Read & Watch more:
+## Read & Watch more
 https://www.youtube.com/watch?v=MgowR4pq3e8&t=492s.
 
 http://u.cs.biu.ac.il/~sarit/advai2018/MCTS.pdf.
