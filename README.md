@@ -17,16 +17,16 @@ TODO
 
 ### Creation of MCTS consists four stages:
 Selection  
-*Used for nodes we've seen before.  
-*Pick according to UCB.  
+* Used for nodes we've seen before.  
+* Pick according to UCB.  
 Expansion  
-*Used when we reach the frontier.  
-Add one node per playout.  
+* Used when we reach the frontier.  
+* Add one node per playout.  
 Simulation  
-Used beyond the search frontier.  
-Don't bother with UCB, just play randomly.  
+- Used beyond the search frontier.  
+- Don't bother with UCB, just play randomly.  
 Backpropagation  
-After reaching a terminal node.  
+- After reaching a terminal node.  
 
 ## AlphaZero in General
 todo
