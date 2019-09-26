@@ -9,7 +9,11 @@ TODO
 # Theoretical Background
 
 ## ResNet
-TODO
+ResNet, short for Residual Networks is a classic neural network used as a backbone for many computer vision tasks. This model was the winner of ImageNet challenge in 2015. The fundamental breakthrough with ResNet was it allowed us to train extremely deep neural networks with 150+layers successfully. Prior to ResNet training very deep neural networks was difficult due to the problem of vanishing gradients.
+
+### Skip Connection
+ResNet first introduced the concept of skip connection. We still stack convolution layers but we now also add the original input to the output of the convolution block. This is called skip connection.
+Skip connections allow the model to learn an identity function which ensures that the higher layer will perform at least as good as the lower layer, and not worse
 
 ## Reinforcement Learning
 Reinforcement learning differs from the supervised learning in a way that in supervised learning the training data has the answer key with it so the model is trained with the correct answer itself whereas in reinforcement learning, there is no answer but the reinforcement agent decides what to do to perform the given task.  In the absence of training dataset, it is bound to learn from its experience.
