@@ -16,7 +16,7 @@ Reinforcement learning differs from the supervised learning in a way that in sup
 TODO
 
 ### Creation of MCTS consists four stages:
-Selection. 
+Selection  
 *Used for nodes we've seen before.  
 *Pick according to UCB.  
 Expansion  
