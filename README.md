@@ -1,7 +1,5 @@
 # AlphaZeroHex: Regular & Humanized 
-Human players prefer training with human opponents over agents as the latter are distinctively different in level and style than humans.  
-Agents designed for human-agent play are capable of adjusting their level, however their style is not aligned with that of human players.  
-In this work, we implement approach for designing such agents with the game of hex.  
+Human players prefer training with human opponents over agents as the latter are distinctively different in level and style than humans. Agents designed for human-agent play are capable of adjusting their level, however their style is not aligned with that of human players. In this work, we implement approach for designing such agents with the game of hex.  
 
 ### Supervision and Original Paper
 TODO
