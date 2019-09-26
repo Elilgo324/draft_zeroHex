@@ -16,16 +16,16 @@ Reinforcement learning differs from the supervised learning in a way that in sup
 TODO
 
 ### Creation of MCTS consists four stages:
-Selection  
+* Selection  
   * Used for nodes we've seen before.  
   * Pick according to UCB.  
-Expansion  
+* Expansion  
   * Used when we reach the frontier.  
   * Add one node per playout.  
-Simulation  
+* Simulation  
   * Used beyond the search frontier.  
   * Don't bother with UCB, just play randomly.  
-Backpropagation  
+* Backpropagation  
   * After reaching a terminal node.  
 
 ## AlphaZero in General
