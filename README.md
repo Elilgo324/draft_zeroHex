@@ -6,6 +6,8 @@ In this work, we implement approach for designing such agents with the game of h
 ### Supervision and Original Paper
 TODO
 
+# Theoretical Background
+
 ## ResNet
 TODO
 
@@ -31,7 +33,7 @@ TODO
 ## AlphaZero in General
 todo
 
-## This AlphaZero Implementation Details
+# This AlphaZero
 TODO
 
 ###
@@ -47,7 +49,7 @@ TODO
 `hex_zero_model.py` contains the building of the Deep Neural Network used for policy and value prediction.
 `sl_bootstrap.py` contains a script to bootstrap the neural network on existing hex data, calling on hex_zero_model to build the neural net before training the neural net for the specified epochs.
 
-## Humanization Train
+# Humanization
 
 ### Data
 We found lists of ELO ranked players and their games (board size 11X11) at http://www.littlegolem.net/jsp/info/player_list.jsp?gtvar=hex_HEX11&countryid=&filter=&Send=submit.
