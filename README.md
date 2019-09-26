@@ -1,7 +1,7 @@
 # AlphaZeroHex: Regular & Humanized 
-Human players prefer training with human opponents over agents as the latter are distinctively different in level and style than humans.
-Agents designed for human-agent play are capable of adjusting their level, however their style is not aligned with that of human players.
-In this work, we implement approach for designing such agents with the game of hex.
+Human players prefer training with human opponents over agents as the latter are distinctively different in level and style than humans.  
+Agents designed for human-agent play are capable of adjusting their level, however their style is not aligned with that of human players.  
+In this work, we implement approach for designing such agents with the game of hex.  
 
 ### Supervision and Original Paper
 TODO
@@ -10,25 +10,18 @@ TODO
 TODO
 
 ## Reinforcement Learning
-Reinforcement learning differs from the supervised learning in a way that in supervised learning the training data has the answer key with it so the model is trained with the correct answer itself whereas in reinforcement learning, there is no answer but the reinforcement agent decides what to do to perform the given task. In the absence of training dataset, it is bound to learn from its experience.
+Reinforcement learning differs from the supervised learning in a way that in supervised learning the training data has the answer key with it so the model is trained with the correct answer itself whereas in reinforcement learning, there is no answer but the reinforcement agent decides what to do to perform the given task.  In the absence of training dataset, it is bound to learn from its experience.
 
 ## MCTS
 TODO
 
 ### Creation of MCTS consists four stages:
-Selection
-    Used for nodes we've seen before.
-    Pick according to UCB.
-Expansion
-    Used when we reach the frontier.
-    Add one node per playout.
-Simulation
-    Used beyond the search frontier.
-    Don't bother with UCB, just play randomly.
-Backpropagation
-    After reaching a terminal node.
-    Update value and visits for states expanded in selection and expansion.
-    
+Selection  Used for nodes we've seen before.  Pick according to UCB.
+Expansion  Used when we reach the frontier.  Add one node per playout.
+Simulation  Used beyond the search frontier.  Don't bother with UCB, just play randomly.
+Backpropagation  After reaching a terminal node.  
+Expansion  Update value and visits for states expanded in selection and expansion.  
+
 ## AlphaZero in General
 todo
 
