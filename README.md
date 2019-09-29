@@ -22,7 +22,7 @@ The focus of MCTS is on the analysis of the most promising moves, expanding the 
 
 ### Exploration & Exploitation Tradeoff
 The main difficulty in selecting child nodes is maintaining some balance between the exploitation of deep variants after moves with high average win rate and the exploration of moves with few simulations. A formula for balancing exploitation and exploration in games called UCT.
-* In this formula:
+* In the UCT formula:
   * wi stands for the number of wins for the node considered after the i-th move
   * ni stands for the number of simulations for the node considered after the i-th move
   * Ni stands for the total number of simulations after the i-th move ran by the parent node of the one considered
