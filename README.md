@@ -43,9 +43,11 @@ The first component of the formula above corresponds to exploitation; it is high
   * After reaching a terminal node.  
 
 ## AlphaZero in General
-todo
+An untrained neural network plays millions of games against itself via a process of trial and error called reinforcement learning. At first, it plays completely randomly, but over time the system learns from wins, losses, and draws to adjust the parameters of the neural network, making it more likely to choose advantageous moves in the future. The amount of training the network needs depends on the style and complexity of the game, taking approximately 9 hours for chess, 12 hours for shogi, and 13 days for Go.
 
-# This AlphaZero
+The trained network is used to guide a search algorithm – known as Monte-Carlo Tree Search (MCTS) – to select the most promising moves in games. For each move, AlphaZero searches only a small fraction of the positions considered by traditional chess engines. In Chess, for example, it searches only 60 thousand positions per second in chess, compared to roughly 60 million for Stockfish.
+
+# This AlphaZero's Imlementation
 TODO
 
 ###
@@ -85,15 +87,12 @@ Here you can find a gui that works with the agent - https://github.com/DebuggerO
 Modified by Avshalom Tam, Ori Fogler and Shlomo Rabinovich as undergraduates' final project at Bar Ilan University.
 
 ## Read & Watch more
-https://www.biostat.wisc.edu/~craven/cs760/lectures/AlphaZero.pdf.
-
-https://www.youtube.com/watch?v=MgowR4pq3e8&t=492s.
-
-http://u.cs.biu.ac.il/~sarit/advai2018/MCTS.pdf.
-
-https://medium.com/oracledevs/lessons-from-implementing-alphazero-7e36e9054191 and more at medium.com.
-
-https://notes.jasonljin.com/projects/2018/05/20/Training-AlphaZero-To-Play-Hex.html.
+* https://nikcheerla.github.io/deeplearningschool/2018/01/01/AlphaZero-Explained/.
+* https://www.biostat.wisc.edu/~craven/cs760/lectures/AlphaZero.pdf.
+* https://www.youtube.com/watch?v=MgowR4pq3e8&t=492s.
+* http://u.cs.biu.ac.il/~sarit/advai2018/MCTS.pdf.
+* https://medium.com/oracledevs/lessons-from-implementing-alphazero-7e36e9054191 and more at medium.com.
+* https://notes.jasonljin.com/projects/2018/05/20/Training-AlphaZero-To-Play-Hex.html.
 
 
 
