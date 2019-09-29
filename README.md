@@ -21,25 +21,12 @@ Monte Carlo tree search is a heuristic search algorithm, most notably employed i
 The focus of MCTS is on the analysis of the most promising moves, expanding the search tree based on random sampling of the search space. The application of Monte Carlo tree search in games is based on many playouts also called roll-outs. In each playout, the game is played out to the very end by selecting moves at random. The final game result of each playout is then used to weight the nodes in the game tree so that better nodes are more likely to be chosen in future playouts.
 
 ### Exploration & Exploitation Tradeoff
-The main difficulty in selecting child nodes is maintaining some balance between the exploitation of deep variants after moves with high average win rate and the exploration of moves with few simulations. A formula for balancing exploitation and exploration in games called UCT (Upper Confidence Bound 1 applied to trees), was introduced by Levente Kocsis and Csaba Szepesvári.[16] UCT is based on the UCB1 formula derived by Auer, Cesa-Bianchi, and Fischer[38] and the provably convergent AMS (Adaptive Multi-stage Sampling) algorithm first applied to multi-stage decision making models (specifically, Markov Decision Processes) by Chang, Fu, Hu, and Marcus.[11] Kocsis and Szepesvári recommend to choose in each node of the game tree the move for which the expression 
-w
-i
-n
-i
-+
-c
-ln
-⁡
-N
-i
-n
-i
-{\displaystyle {\frac {w_{i}}{n_{i}}}+c{\sqrt {\frac {\ln N_{i}}{n_{i}}}}} has the highest value. In this formula:
-
-wi stands for the number of wins for the node considered after the i-th move
-ni stands for the number of simulations for the node considered after the i-th move
-Ni stands for the total number of simulations after the i-th move ran by the parent node of the one considered
-c is the exploration parameter—theoretically equal to √2; in practice usually chosen empirically
+The main difficulty in selecting child nodes is maintaining some balance between the exploitation of deep variants after moves with high average win rate and the exploration of moves with few simulations. A formula for balancing exploitation and exploration in games called UCT.
+* In this formula:
+ * wi stands for the number of wins for the node considered after the i-th move
+ * ni stands for the number of simulations for the node considered after the i-th move
+ * Ni stands for the total number of simulations after the i-th move ran by the parent node of the one considered
+ * c is the exploration parameter—theoretically equal to √2; in practice usually chosen empirically
 The first component of the formula above corresponds to exploitation; it is high for moves with high average win ratio. The second component corresponds to exploration; it is high for moves with few simulations.
 
 Most contemporary implementations of Monte Carlo tree search are based on some variant of UCT that traces its roots back to the AMS simulation optimization algorithm for estimating the value function in finite-horizon Markov Decision Processes (MDPs) introduced by Chang et al.[11] (2005) in Operations Research. (AMS was the first work to explore the idea of UCB-based exploration and exploitation in constructing sampled/simulated (Monte Carlo) trees and was the main seed for UCT.[12])
