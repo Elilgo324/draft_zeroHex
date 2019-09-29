@@ -23,10 +23,10 @@ The focus of MCTS is on the analysis of the most promising moves, expanding the 
 ### Exploration & Exploitation Tradeoff
 The main difficulty in selecting child nodes is maintaining some balance between the exploitation of deep variants after moves with high average win rate and the exploration of moves with few simulations. A formula for balancing exploitation and exploration in games called UCT.
 * In the UCT formula:
-  * wi stands for the number of wins for the node considered after the i-th move
-  * ni stands for the number of simulations for the node considered after the i-th move
-  * Ni stands for the total number of simulations after the i-th move ran by the parent node of the one considered
-  * c is the exploration parameter—theoretically equal to √2; in practice usually chosen empirically
+  * wi stands for the number of wins for the node considered after the i-th move.
+  * ni stands for the number of simulations for the node considered after the i-th move.
+  * Ni stands for the total number of simulations after the i-th move ran by the parent node of the one considered.
+  * c is the exploration parameter—theoretically equal to √2; in practice usually chosen empirically.
 The first component of the formula above corresponds to exploitation; it is high for moves with high average win ratio. The second component corresponds to exploration; it is high for moves with few simulations.
 
 ### Creation of MCTS consists four stages:
@@ -42,10 +42,14 @@ The first component of the formula above corresponds to exploitation; it is high
 * Backpropagation  
   * After reaching a terminal node.  
 
-## AlphaZero in General
-An untrained neural network plays millions of games against itself via a process of trial and error called reinforcement learning. At first, it plays completely randomly, but over time the system learns from wins, losses, and draws to adjust the parameters of the neural network, making it more likely to choose advantageous moves in the future. The amount of training the network needs depends on the style and complexity of the game, taking approximately 9 hours for chess, 12 hours for shogi, and 13 days for Go.
+## AlphaZero's Idea
+Given enough playouts, UCT will be able to explore all of the important game positions in any game and determine their values using the Monte Carlo Method. But the amount of playouts needed in games like chess, Go, and Gomoku for this to happen is still computationally infeasible, even with UCT prioritization. Thus, most viable MCTS engines for these games end up exploiting a lot of domain-specific knowledge and heuristics.
 
-The trained network is used to guide a search algorithm – known as Monte-Carlo Tree Search (MCTS) – to select the most promising moves in games. For each move, AlphaZero searches only a small fraction of the positions considered by traditional chess engines. In Chess, for example, it searches only 60 thousand positions per second in chess, compared to roughly 60 million for Stockfish.
+Instead of memorizing a heuristic value for every game state, we can train a deep neural network to learn heuristic values from “images” of a game board. Adding in a deep neural network gives our models more of the learned “intuition” that human players often leverage.
+
+Along with predicting the value of a given state, AlphaZero also tries to predict a probability distribution on the best moves from a given state (to combat overfitting), using a network with a “policy head” and a “value head”. These two measures cross-validate one another to ensure the network is rarely confident about wrong predictions.
+
+As the deep neural network improves, it makes the MCTS search more efficient, which results in better state valuations to train the deep neural network with – causing a self-reinforcing cycle that can quickly snowball.
 
 # This AlphaZero's Imlementation
 TODO
