@@ -32,13 +32,13 @@ The first component of the formula above corresponds to exploitation; it is high
 ### Creation of MCTS consists four stages:
 * Selection  
   * Used for nodes we've seen before.  
-  * Pick according to UCB.  
+  * Pick according to UCT.  
 * Expansion  
   * Used when we reach the frontier.  
   * Add one node per playout.  
 * Simulation  
   * Used beyond the search frontier.  
-  * Don't bother with UCB, just play randomly.  
+  * Don't bother with UCT, just play randomly.  
 * Backpropagation  
   * After reaching a terminal node.  
 
