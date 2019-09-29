@@ -23,13 +23,12 @@ The focus of MCTS is on the analysis of the most promising moves, expanding the 
 ### Exploration & Exploitation Tradeoff
 The main difficulty in selecting child nodes is maintaining some balance between the exploitation of deep variants after moves with high average win rate and the exploration of moves with few simulations. A formula for balancing exploitation and exploration in games called UCT.
 * In this formula:
- * wi stands for the number of wins for the node considered after the i-th move
- * ni stands for the number of simulations for the node considered after the i-th move
- * Ni stands for the total number of simulations after the i-th move ran by the parent node of the one considered
- * c is the exploration parameter—theoretically equal to √2; in practice usually chosen empirically
+  * wi stands for the number of wins for the node considered after the i-th move
+  * ni stands for the number of simulations for the node considered after the i-th move
+  * Ni stands for the total number of simulations after the i-th move ran by the parent node of the one considered
+  * c is the exploration parameter—theoretically equal to √2; in practice usually chosen empirically
 The first component of the formula above corresponds to exploitation; it is high for moves with high average win ratio. The second component corresponds to exploration; it is high for moves with few simulations.
 
-Most contemporary implementations of Monte Carlo tree search are based on some variant of UCT that traces its roots back to the AMS simulation optimization algorithm for estimating the value function in finite-horizon Markov Decision Processes (MDPs) introduced by Chang et al.[11] (2005) in Operations Research. (AMS was the first work to explore the idea of UCB-based exploration and exploitation in constructing sampled/simulated (Monte Carlo) trees and was the main seed for UCT.[12])
 ### Creation of MCTS consists four stages:
 * Selection  
   * Used for nodes we've seen before.  
