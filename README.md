@@ -59,7 +59,24 @@ Along with predicting the value of a given state, AlphaZero also tries to predic
 As the deep neural network improves, it makes the MCTS search more efficient, which results in better state valuations to train the deep neural network with – causing a self-reinforcing cycle that can quickly snowball.
 
 # This AlphaZero's Imlementation
-TODO
+
+## Files
+
+### basic players
+Two basic players, a human and random, that its possible to play against.
+
+### agent
+The actual AlphaZero player that runs the MCTS that uses the resNet.  
+
+### main
+
+### supervised init nn
+
+### bootstrap nn
+Do initial basic supervised learning to the nn. Needed because lack of computational resources.
+
+## Gui
+Here you can find a gui that works with the agent of this implementation - https://github.com/DebuggerOR/hexgui.
 
 ###
 `TrainAlphaHexZero.py` contains a script to self-play a specified number of iterations. In each iteration, the AlphaHex agent plays a specified number of games against itself, where it collects randomly 50% of the game data played in the iteration and saves it into a .npz file. It then trains the current best model on this game data for a specified number of epochs, and evaluates the new model against this previous model for a specified number of iterations, where the results are written to a .txt file. If the win rate is over a set threshold, than the new model will become the new current best model to be used in the next iteration of self play.  
